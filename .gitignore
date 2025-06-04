@@ -42,3 +42,36 @@ bin/
 .DS_Store
 # Ignore Gradle build output directory
 build
+
+# Ignore build output folders
+/out/
+/target/
+/bin/
+
+# IntelliJ IDEA project files
+/.idea/
+/*.iml
+/*.iws
+
+# Maven / Gradle
+/.mvn/
+/build/
+/.gradle/
+/*.class
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Eclipse files (if any)
+/.project
+/.classpath
+/.settings/
+
+# Others
+*.jar
+*.war
+*.ear
