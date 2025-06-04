@@ -48,6 +48,14 @@ build
 /target/
 /bin/
 
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Gradle
+/build/
+.gradle/
+
 # IntelliJ IDEA project files
 /.idea/
 /*.iml
