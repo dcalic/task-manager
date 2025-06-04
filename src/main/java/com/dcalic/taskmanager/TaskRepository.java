@@ -12,10 +12,10 @@ public class TaskRepository {
     }
 
     List<Task> getAllTasks(){
-        return tasks;
+        return new ArrayList<>(tasks); // Return a copy for safetyurn tasks;
     }
 
-    boolean deteleTask(int d){
+    public boolean deleteTask(int d){
         return tasks.remove(d).isCompleted();
     }
 
