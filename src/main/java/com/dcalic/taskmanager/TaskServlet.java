@@ -1,12 +1,10 @@
 package com.dcalic.taskmanager;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/tasks")
 public class TaskServlet extends HttpServlet {
     private final TaskRepository repository = new TaskRepository();
 
