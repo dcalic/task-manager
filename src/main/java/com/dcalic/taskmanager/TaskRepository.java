@@ -15,8 +15,14 @@ public class TaskRepository {
         return new ArrayList<>(tasks); // Return a copy for safetyurn tasks;
     }
 
-    public boolean deleteTask(int d){
-        return tasks.remove(d).isCompleted();
+    public boolean deleteTask(int id) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                return tasks.remove(task);
+            }
+        }
+        return false; // not found
     }
+
 
 }
