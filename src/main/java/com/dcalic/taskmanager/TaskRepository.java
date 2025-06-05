@@ -24,5 +24,23 @@ public class TaskRepository {
         return false; // not found
     }
 
+    public boolean updateTask(int id, String newTitle) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setTitle(newTitle);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Task getTaskById(int taskId) {
+        for (Task task : tasks) {
+            if (task.getId() == taskId) {
+                return task;
+            }
+        }
+        return null;
+    }
 
 }
