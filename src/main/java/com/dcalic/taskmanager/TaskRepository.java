@@ -1,5 +1,6 @@
 package com.dcalic.taskmanager;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,14 @@ public class TaskRepository {
         return tasks.removeIf(task -> task.getId() == id);
     }
 
-    public boolean updateTask(int id, String newTitle) {
+    public boolean updateTask(int id, String newTitle, LocalDate date) {
         for (Task task : tasks) {
             if (task.getId() == id) {
                 task.setTitle(newTitle);
-                moveToTop(task); // Move updated task to top
+                if (date != null) {
+                    task.setDueDate(date);
+                }
+                moveToTop(task);
                 return true;
             }
         }

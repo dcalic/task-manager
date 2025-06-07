@@ -20,6 +20,12 @@
           placeholder="Enter task title..."
           required
         />
+         <input
+          type="date"
+          name="dueDate"
+          class="form-control"
+          placeholder="Due date (optional)"
+         />
         <button type="submit" class="create_task_button btn">
           Create
         </button>

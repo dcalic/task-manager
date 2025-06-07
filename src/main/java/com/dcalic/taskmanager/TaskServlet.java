@@ -3,6 +3,8 @@ package com.dcalic.taskmanager;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class TaskServlet extends HttpServlet {
@@ -66,9 +68,20 @@ public class TaskServlet extends HttpServlet {
 
     private void handleAdd(HttpServletRequest req) {
         String title = req.getParameter("title");
+        String dueDateStr = req.getParameter("dueDate");
+        LocalDate date = null;
+
+        if (dueDateStr != null && !dueDateStr.trim().isEmpty()) {
+            try {
+                date = LocalDate.parse(dueDateStr);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid due date format: " + dueDateStr);
+            }
+        }
+
         if (title != null && !title.trim().isEmpty()) {
             int id = (int) (Math.random() * 100_000);
-            Task task = new Task(id, title.trim(), false);
+            Task task = new Task(id, title.trim(), false, date);
             repository.addTask(task);
         }
     }
@@ -76,11 +89,22 @@ public class TaskServlet extends HttpServlet {
     private void handleEdit(HttpServletRequest req) {
         String idStr = req.getParameter("taskId");
         String newTitle = req.getParameter("newTitle");
+        String newDate = req.getParameter("newDate");
 
         if (idStr != null && !idStr.isEmpty() && newTitle != null && !newTitle.trim().isEmpty()) {
             try {
                 int id = Integer.parseInt(idStr);
-                boolean updated = repository.updateTask(id, newTitle.trim());
+                LocalDate parsedDate = null;
+
+                if (newDate != null && !newDate.trim().isEmpty()) {
+                    try {
+                        parsedDate = LocalDate.parse(newDate);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid date format: " + newDate);
+                    }
+                }
+
+                boolean updated = repository.updateTask(id, newTitle.trim(), parsedDate);
                 if (!updated) {
                     System.out.println("Failed to update task with ID " + id);
                 }
@@ -91,6 +115,7 @@ public class TaskServlet extends HttpServlet {
             System.out.println("Missing taskId or newTitle for edit");
         }
     }
+
 
 
 }
