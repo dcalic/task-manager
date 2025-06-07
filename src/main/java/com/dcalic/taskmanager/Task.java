@@ -1,21 +1,21 @@
 package com.dcalic.taskmanager;
 
-//model layer of my web app
-
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Task {
 
     private int id;
     private String title;
     private boolean completed;
-    private LocalDateTime lastModified;
+    private LocalDate dueDate;
 
-    public Task(int id, String title, boolean completed) {
+    public Task(int id, String title, boolean completed,LocalDate date) {
         this.id = id;
         this.title = title;
         this.completed = completed;
+        this.dueDate=date;
     }
 
     public int getId() {
@@ -42,12 +42,35 @@ public class Task {
         this.completed = completed;
     }
 
-    public void setLastModified(LocalDateTime lastModified) {
-        this.lastModified = lastModified;
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 
-    public LocalDateTime getLastModified() {
-        return lastModified;
+    public String getPrettyDueDate() {
+        if (dueDate == null) return "";
+
+        String month = dueDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int day = dueDate.getDayOfMonth();
+        int year = dueDate.getYear();
+
+        String suffix;
+        if (day >= 11 && day <= 13) {
+            suffix = "th";
+        } else {
+            switch (day % 10) {
+                case 1: suffix = "st"; break;
+                case 2: suffix = "nd"; break;
+                case 3: suffix = "rd"; break;
+                default: suffix = "th";
+            }
+        }
+
+        return String.format("%s, %d%s %d.", month, day, suffix, year);
+    }
+
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     @Override
@@ -56,7 +79,7 @@ public class Task {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", completed=" + completed +
+                ", dueDate=" + dueDate +
                 '}';
     }
-
 }

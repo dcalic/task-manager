@@ -1,0 +1,27 @@
+@keyframes fadeAndMove {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+.fade-and-pink-animation {
+  animation: fadeAndMove 1s forwards;
+}
+
+.fade-and-pink-animation .task_standalone {
+  animation: pinkBackground 1s forwards;
+}
+
+@keyframes pinkBackground {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: pink;
+  }
+}
