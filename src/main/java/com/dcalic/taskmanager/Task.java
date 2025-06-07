@@ -2,11 +2,15 @@ package com.dcalic.taskmanager;
 
 //model layer of my web app
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class Task {
 
     private int id;
     private String title;
     private boolean completed;
+    private LocalDateTime lastModified;
 
     public Task(int id, String title, boolean completed) {
         this.id = id;
@@ -38,6 +42,14 @@ public class Task {
         this.completed = completed;
     }
 
+    public void setLastModified(LocalDateTime lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public LocalDateTime getLastModified() {
+        return lastModified;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -46,4 +58,5 @@ public class Task {
                 ", completed=" + completed +
                 '}';
     }
+
 }

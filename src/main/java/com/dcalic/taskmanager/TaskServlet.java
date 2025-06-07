@@ -47,8 +47,6 @@ public class TaskServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/tasks");
     }
 
-
-
     private void showAllTasks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Task> tasks = repository.getAllTasks();
         req.setAttribute("tasks", tasks);

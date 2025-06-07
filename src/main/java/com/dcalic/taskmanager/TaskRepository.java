@@ -5,33 +5,34 @@ import java.util.List;
 
 public class TaskRepository {
 
-    private List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
-    void addTask(Task task){
+    void addTask(Task task) {
         tasks.add(task);
     }
 
-    List<Task> getAllTasks(){
-        return new ArrayList<>(tasks); // Return a copy for safetyurn tasks;
+    List<Task> getAllTasks() {
+        return new ArrayList<>(tasks); // Return a copy to prevent external modification
     }
 
     public boolean deleteTask(int id) {
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                return tasks.remove(task);
-            }
-        }
-        return false; // not found
+        return tasks.removeIf(task -> task.getId() == id);
     }
 
     public boolean updateTask(int id, String newTitle) {
         for (Task task : tasks) {
             if (task.getId() == id) {
                 task.setTitle(newTitle);
+                moveToTop(task); // Move updated task to top
                 return true;
             }
         }
         return false;
+    }
+
+    private void moveToTop(Task task) {
+        tasks.remove(task);
+        tasks.add(0, task);
     }
 
     public Task getTaskById(int taskId) {
@@ -42,5 +43,4 @@ public class TaskRepository {
         }
         return null;
     }
-
 }
